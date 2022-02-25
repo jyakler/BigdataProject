@@ -3,6 +3,7 @@ from django.contrib.auth.models import User
 from django.contrib import auth
 from bookL.models import Post, Reply
 from django.core.paginator import Paginator
+from django.utils import timezone
 
 #게시글(쇼핑목록) 페이지
 def board_list(request):
@@ -65,8 +66,18 @@ def reply_create(request):
     return redirect("페이지")
 
 #판매완료(기능)
-def sold_out(request):
+def sold_out(request, post_id):
+    post = Post.objects.get(id=post_id)
 
+    if request.method == "POST":
+        post.title = request.POST['title'] +'판매완료'
+        post.body = request.POST['body']
+        post.pub_date = timezone.datetime.now()
+        post.save()
+        return redirect('쇼핑목록페이지')
+
+    else:
+        return render(request, 'update.html')
 
 #게시글 정렬(기능)
 
