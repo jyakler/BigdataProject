@@ -57,12 +57,16 @@ def delete(request):
 def reply_create(request):
     content = request.GET['content']
     pk = request.GET['pk']
-    visitor = Post.objects.get(pk=pk)  # pk=pk, id=pk
-    rdata = Reply(content=content, visitor=visitor)
+    post = Post.objects.get(pk=pk)  # pk=pk, id=pk
+    rdata = Reply(content=content, post_id=post)
     rdata.save()
+    comment = Reply()
+    comment.user = request.user # request.user는 현재 접속한 유저의 정보
     return redirect("페이지")
 
 #판매완료(기능)
+def sold_out(request):
+
 
 #게시글 정렬(기능)
 
