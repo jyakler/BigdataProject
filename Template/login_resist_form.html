@@ -13,22 +13,27 @@
                     <button type="button" class="togglebtn" onclick="login()">로그인</button>
                     <button type="button" class="togglebtn" onclick="register()">회원가입</button>
                 </div>
+                <div style="color:red">
+                    &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;{{error}}
+                </div>
                 <div class="social-icons">
                     <img src="/static/images/fb.png" alt="facebook">
                     <img src="/static/images/gl.png" alt="google">
                 </div>
-                <form id="login" action="" class="input-group">
-                    <input type="text" class="input-field" placeholder="이메일을 입력하세요." required>
-                    <input type="password" class="input-field" placeholder="비밀번호를 입력하세요." required>
-                    <input type="checkbox" class="checkbox"><span>비밀번호를 기억합니다</span>
+                <form method="POST" id="login" action="{% url 'main:login' %}" class="input-group">
+                    {% csrf_token %}
+                    <input type="text" class="input-field" name="useremail" placeholder="이메일을 입력하세요." required>
+                    <input type="password" class="input-field" name="password" placeholder="비밀번호를 입력하세요." required>
+                    <input type="checkbox" class="checkbox" name="remember"><span>로그인 유지</span>
                     <button class="submit">로그인</button>
                 </form>
-                <form id="register" action="" class="input-group">
-                    <input type="text" class="input-field" placeholder="별명을 입력하세요." required>
-                    <input type="text" class="input-field" placeholder="전화번호를 입력하세요."required>
-                    <input type="email" class="input-field" placeholder="이메일을 입력하세요." required>
-                    <input type="password" class="input-field" placeholder="비밀번호를 입력하세요." required>
-                    <input type="checkbox" class="checkbox"><span>이용약관 동의</span>
+                <form method="POST" id="register" action="{% url 'main:register' %}" class="input-group">
+                    {% csrf_token %}
+                    <input type="text" class="input-field" name="nickname" placeholder="별명을 입력하세요." required>
+                    <input type="email" class="input-field" name="useremail" placeholder="이메일을 입력하세요." required>
+                    <input type="password" class="input-field" name="password" placeholder="비밀번호를 입력하세요." required>
+                    <input type="password" class="input-field" name="re-password" placeholder="비밀번호를 다시 입력하세요." required>
+                    <input type="checkbox" class="checkbox"><span>약관동의</span>
                     <button class="submit">등록하기</button>
                 </form>
             </div>
@@ -48,7 +53,8 @@
             var y = document.getElementById("register");
             var z = document.getElementById("btn");
             
-            
+            document.cookie
+
             function login(){
                 x.style.left = "50px";
                 y.style.left = "450px";

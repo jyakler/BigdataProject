@@ -17,10 +17,15 @@ def login(request):
     if request.method=="POST":#로그인 요청이 들어옴
         useremail=request.POST.get('useremail',None)#사용자 아이디
         password=request.POST.get('password',None)
+        remember=request.POST.get('remember',False)
         user=auth.authenticate(username=useremail,password=password)
     #로그인 성공
         if user is not None:
             auth.login(request,user)
+            if not remember:
+                SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+            else:
+                SESSION_EXPIRE_AT_BROWSER_CLOSE=False
             return redirect('main:index')
         else:#로그인 실패
             print("에러")
@@ -60,6 +65,7 @@ def register(request):
             user=User.objects.create_user(username=useremail,last_name=nickname,
                                           password=password)
             auth.login(request,user)
+            print("여기까지?")
             return redirect('main:index')
     return render(request,'login_resist_form.html',res_data)
 
