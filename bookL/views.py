@@ -23,9 +23,9 @@ def login(request):
         if user is not None:
             auth.login(request,user)
             if not remember:
-                SESSION_EXPIRE_AT_BROWSER_CLOSE=True
+                request.session.set_expiry(0)
             else:
-                SESSION_EXPIRE_AT_BROWSER_CLOSE=False
+                request.session.set_expiry(60*60*24*14)
             return redirect('main:index')
         else:#로그인 실패
             print("에러")
