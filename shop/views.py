@@ -89,10 +89,10 @@ def page_array(request):
     elif sort == 'price':
         post_list = Post.objects.all().order_by('-price', '-created at') # 가격 순으로 정렬
     else:
-        post_list = Post.objects.all().order_by('-date') # 날짜 순으로 정렬
+        post_list = Post.objects.all().order_by('-created at') # 날짜 순으로 정렬
 
     paginator = Paginator(post_list, 5)
-    page = request.GET.get('page', '')
+    page = request.GET.get('page', 1)
     posts = paginator.get_page(page)
     board = Post.objects.all()
 
