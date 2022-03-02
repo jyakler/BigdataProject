@@ -48,6 +48,9 @@ def p_create(request):
     return redirect('쇼핑목록페이지')
 
 #게시글 삭제(기능)
+'''
+html 에서 쿼리로 pk정보 받아와야함
+'''
 def delete(request):
     pk=request.GET['pk']
     post=Post.objects.get(pk=pk)
@@ -63,6 +66,7 @@ def reply_create(request):
     rdata.save()
     comment = Reply()
     comment.user = request.user # request.user는 현재 접속한 유저의 정보
+    #위 정보가 필요한가?
     return redirect("페이지")
 
 #판매완료(기능)

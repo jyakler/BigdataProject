@@ -7,7 +7,7 @@ def index(request):
     context=None
     if request.user.is_authenticated:
         context={'logineduser':request.user}
-    return render(request,'메인페이지',context)
+    return render(request,'index.html',context)
 '''
 메인페이지에 로그인했는지 여부를 나누어 메인페이지 상단탭에 로그인/회원가입<->로그아웃 표시 나오게
 '''
@@ -23,9 +23,10 @@ def login(request):
             auth.login(request,user)
             return redirect('main:index')
         else:#로그인 실패
-            return render(request,'로그인페이지',{'error':'사용자 아이디 또는 패스워드가 틀립니다.'})
+            print("에러")
+            return render(request,'login_resist_form.html',{'error':'사용자 아이디 또는 패스워드가 틀립니다.'})
     else:
-        return render(request,'로그인페이지')
+        return render(request,'login_resist_form.html')
 
 #로그아웃
 def logout(request):
@@ -60,7 +61,7 @@ def register(request):
                                           password=password)
             auth.login(request,user)
             return redirect('main:index')
-    return render(request,'회원가입',res_data)
+    return render(request,'login_resist_form.html',res_data)
 
 #마이페이지
 def mypage(request):
