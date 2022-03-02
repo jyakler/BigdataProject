@@ -7,7 +7,7 @@ from django.utils import timezone
 
 #게시글(쇼핑목록) 페이지
 def board_list(request):
-    all_boards = Post.objects.all().order_by('-id') #Board는 게시글 작성 함수 이름임, 최신게시글이 맨 위에
+    all_boards = Post.objects.all().order_by('-created at') #Board는 게시글 작성 함수 이름임, 최신게시글이 맨 위에
     page = int(request.GET.get('p', 1)) # 현재 페이지를 나타냄
     paginator = Paginator(all_boards, 6) # 한 페이지에 게시물 6개 보임
     boards = paginator.get_page(page) # 해당 페이지 번호를 리턴받아 현재 페이지를 나타냄
@@ -81,6 +81,21 @@ def sold_out(request, post_id):
     else:
         return render(request, 'update.html')
 
-#게시글 정렬(기능)
+#게시글 정렬(기능) - 최신순, 가격순
+def page_array(request):
+    sort = request.GET.get('sort', '')
+    if sort == 'title':
+        post_list = Post.objects.all().order_by('-title', '-created at') #제목 가나다 순으로 정렬
+    elif sort == 'price':
+        post_list = Post.objects.all().order_by('-price', '-created at') # 가격 순으로 정렬
+    else:
+        post_list = Post.objects.all().order_by('-date') # 날짜 순으로 정렬
+
+    paginator = Paginator(post_list, 5)
+    page = request.GET.get('page', '')
+    posts = paginator.get_page(page)
+    board = Post.objects.all()
+
+    return render(request, 'home.html', {'posts': posts, 'Board': board, 'sort': sort})
 
 #html- 게시글페이지, 게시글 누른후 페이지, 게시글 작성페이지
