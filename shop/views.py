@@ -40,14 +40,19 @@ def search(request):
 
 #게시글 작성(판매하기 게시판)
 def p_create(request):
-    nickname=request.POST['username']
-    title=request.POST['title']
-    price=request.POST['price']
-    photo=request.FILES('photo',None)
-    content=request.POST['content']
-    pdata=Post(username=nickname,content=content,price=price,title=title,photo=photo)
-    pdata.save()
-    return redirect('쇼핑목록페이지')
+    if request.user.is_authenticated:#로그인 상태면
+        if request.method=="POST":
+            nickname=request.user.last_name
+            title=request.POST['title']
+            price=request.POST['price']
+            photo=request.FILES('photo',None)
+            content=request.POST['content']
+            pdata=Post(username=nickname,content=content,price=price,title=title,photo=photo)
+            pdata.save()
+            return redirect('쇼핑목록페이지')
+        return render(request,"deal.html")
+    else:
+        redirect("main:index")
 
 #게시글 삭제(기능)
 '''
@@ -112,4 +117,4 @@ def likes(request, article_pk):
         return redirect('쇼핑목록페이지') # 좋아요 누르면 새로고침
     return render(request, 'login_resist_form.html') # 로그인 안되 있으면 로그인 창으로 이동
 
-#html- 게시글페이지, 게시글 누른후 페이지, 게시글 작성페이지
+#html- 게시글페이지, 게시글 누른후 페이지
