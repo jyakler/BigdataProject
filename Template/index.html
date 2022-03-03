@@ -39,7 +39,9 @@
 						</form>
 					</div>
 					<div class="wrap_utils">
-						<button class="btn_util"><span class="ico_comm ico_sell"></span>판매하기</button>
+						{% if user.is_authenticated %}
+						<button class="btn_util"><span class="ico_comm ico_sell"></span><a href="{% url 'pC' %}">판매하기</a></button>
+						{% endif %}
 						<button class="btn_util"><span class="ico_comm ico_chat"></span>XX톡</button>
 					</div>
 				</div>

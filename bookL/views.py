@@ -75,6 +75,6 @@ def mypage(request):
     if request.user.is_authenticated:
         context={'user':request.user}
     return render(request,'마이페이지',context)
-#html- 메인페이지, 회원가입페이지, 로그인페이지, 마이페이지
+#html-  마이페이지
 
 #------------------------------------------

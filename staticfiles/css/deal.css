@@ -214,6 +214,7 @@ html {
 	margin: 60px;
 	box-sizing: border-box;
 	border-top: 1px solid #eee;
+
 }
 .form_register .wrap_row {
 	overflow: hidden;
@@ -249,6 +250,7 @@ html {
 	line-height: 38px;
 	border: 1px solid #E8E7EC;
 	box-sizing: border-box;
+	border: 1px solid black;
 }
 .form_register .btn_file {
 	position: relative;
@@ -257,6 +259,7 @@ html {
 	background-color: #F5F6F8;
 	border: 1px solid #EFEEF5;
 	box-sizing: border-box;
+	border: 1px solid black;
 }
 .form_register .btn_file label {
 	display: -webkit-box;
@@ -294,7 +297,7 @@ html {
 .form_register .box_write {
 	position: relative;
 	height: 200px;
-	border: 1px solid #E8E7EC;
+	border: 1px solid black;
 }
 .form_register .box_write textarea {
 	position: absolute;
