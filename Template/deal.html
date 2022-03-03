@@ -49,7 +49,7 @@
 			<div class="w_inner">
 				<!-- 상품 등록하기 폼 -->
 				<div class="form_register">
-					<form action="{% url 'pC' %}" method="POST">
+					<form action="{% url 'pC' %}" method="POST" enctype="multipart/form-data">
 						{% csrf_token %}
 						<fieldset>
 							<legend class="blind">상품 등록하기</legend>
@@ -59,9 +59,9 @@
 										<label for="photo">상품이미지<span class="em stress">*</span><span class="em normal">(0/12)</span></label>
 									</span>
 									<div class="wrap_field btn_file">
-										<input type="file" name="photo" id="photo">
+										<input type="file" name="photo" id="photo" onchange="PreviewImage()" required>
 										<label for="photo">
-											<img src="/static/images/bg_file.png" alt="카메라" class="img_g">
+											<img src="/static/images/bg_file.png" alt="카메라" class="img_g" id="preview">
 											<span>이미지 등록</span>
 										</label>
 									</div>
@@ -89,7 +89,7 @@
 									</span>
 									<div class="wrap_field">
 										<div class="box_write">
-											<textarea name="prodDesc" id="prodDesc" name="content" minlength="10" cols="30" rows="10" placeholder="상품 설명을 입력해 주세요. (10글자 이상)"></textarea>
+											<textarea id="prodDesc" name="content" minlength="10" cols="30" rows="10" placeholder="상품 설명을 입력해 주세요. (10글자 이상)"></textarea>
 										</div>
 									</div>
 								</div>
@@ -103,6 +103,16 @@
 			</div>
 		</main>
 	</div>
+	<script>
+		function PreviewImage(){
+			var preview= new FileReader();
+			preview.onload=function(e){
+				var img= document.getElementById("preview");
+				img.src=e.target.result;
+			};
+			preview.readAsDataURL(document.getElementById("photo").files[0]);
+		}
+	</script>
 </body>
 
 </html>

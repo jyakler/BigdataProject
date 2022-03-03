@@ -259,7 +259,6 @@ html {
 	background-color: #F5F6F8;
 	border: 1px solid #EFEEF5;
 	box-sizing: border-box;
-	border: 1px solid black;
 }
 .form_register .btn_file label {
 	display: -webkit-box;
@@ -285,6 +284,9 @@ html {
 	color: #ACA7C0;
 }
 .form_register .btn_file .img_g {
+    width:auto;height:auto;
+    max-width:200px;
+    max-height:200px;
 	display: block;
 	margin: 0 auto;
 }
@@ -297,7 +299,7 @@ html {
 .form_register .box_write {
 	position: relative;
 	height: 200px;
-	border: 1px solid black;
+    	border: 1px solid black;
 }
 .form_register .box_write textarea {
 	position: absolute;

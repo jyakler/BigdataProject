@@ -42,14 +42,16 @@ def search(request):
 def p_create(request):
     if request.user.is_authenticated:#로그인 상태면
         if request.method=="POST":
-            nickname=request.user.last_name
+            print(request.user)
+            id=request.user
             title=request.POST['title']
             price=request.POST['price']
-            photo=request.FILES('photo',None)
+            photo=request.FILES['photo']
             content=request.POST['content']
-            pdata=Post(username=nickname,content=content,price=price,title=title,photo=photo)
+            print(id,title,price,content)
+            pdata=Post(title=title,username=id,price=price,content=content,photo=photo)
             pdata.save()
-            return redirect('쇼핑목록페이지')
+            return redirect('게시글 누른페이지')
         return render(request,"deal.html")
     else:
         redirect("main:index")
