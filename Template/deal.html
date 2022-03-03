@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BOOK XXXXX</title>
+	<link rel="stylesheet" href="./css/deal.css">
+</head>
+
+<body>
+	<div class="container">
+		<header class="header">
+			<div class="header_top">
+				<div class="w_inner">
+					<a href="#none" class="link_txt">로그인/회원가입</a>
+					<a href="#none" class="link_txt">내상점</a>
+				</div>
+			</div>
+			<div class="header_cont">
+				<div class="w_inner">
+					<!-- 로고 -->
+					<h1 class="logo_tit"><a href="#none" class="link_home">BOOK XXXXX</a></h1>
+					<!-- 검색창 -->
+					<div class="box_search">
+						<form action="#">
+							<fieldset>
+								<legend class="blind">검색하기</legend>
+								<div class="search_area">
+									<input type="text" class="input" placeholder="검색어를 입력해주세요.">
+									<button type="submit" class="btn_search"><span class="blind">검색</span></button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="wrap_utils">
+						<button class="btn_util"><span class="ico_comm ico_sell"></span>판매하기</button>
+						<button class="btn_util"><span class="ico_comm ico_chat"></span>XX톡</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="contents">
+			<div class="w_inner">
+				<!-- 상품 등록하기 폼 -->
+				<div class="form_register">
+					<form action="#">
+						<fieldset>
+							<legend class="blind">상품 등록하기</legend>
+							<div class="wrapper_field">
+								<div class="wrap_row">
+									<span class="label no_space">
+										<label for="imgRegister">상품이미지<span class="em stress">*</span><span class="em normal">(0/12)</span></label>
+									</span>
+									<div class="wrap_field btn_file">
+										<input type="file" name="imgRegister" id="imgRegister">
+										<label for="imgRegister">
+											<img src="./images/bg_file.png" alt="카메라" class="img_g">
+											<span>이미지 등록</span>
+										</label>
+									</div>
+								</div>
+								<div class="wrap_row">
+									<span class="label">
+										<label for="prodTitle">제목<span class="em stress">*</span></label>
+									</span>
+									<div class="wrap_field">
+										<input type="text" id="prodTitle" placeholder="상품 제목을 입력해주세요." class="input">
+									</div>
+								</div>
+								<div class="wrap_row">
+									<span class="label">
+										<label for="prodPrice">가격<span class="em stress">*</span></label>
+									</span>
+									<div class="wrap_field unit_input">
+										<input type="text" id="prodPrice" placeholder="숫자만 입력해주세요." class="input">
+										<span class="txt_unit">원</span>
+									</div>
+								</div>
+								<div class="wrap_row">
+									<span class="label">
+										<label for="prodDesc">설명<span class="em stress">*</span></label>
+									</span>
+									<div class="wrap_field">
+										<div class="box_write">
+											<textarea name="prodDesc" id="prodDesc" minlength="10" cols="30" rows="10" placeholder="상품 설명을 입력해 주세요. (10글자 이상)"></textarea>
+										</div>
+									</div>
+								</div>
+							</div>
+							<div class="area_btn">
+								<button type="submit" class="btn_register">등록하기</button>
+							</div>
+						</fieldset>
+					</form>
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+
+</html>
