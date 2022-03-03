@@ -1,9 +1,10 @@
-from django.shortcuts import render, redirect
+from django.shortcuts import render, redirect, get_object_or_404
 from django.contrib.auth.models import User
 from django.contrib import auth
 from bookL.models import Post, Reply
 from django.core.paginator import Paginator
 from django.utils import timezone
+from django.views.decorators.http import require_POST
 
 #게시글(쇼핑목록) 페이지
 def board_list(request):
@@ -39,19 +40,14 @@ def search(request):
 
 #게시글 작성(판매하기 게시판)
 def p_create(request):
-    if request.user.is_authenticated:#로그인 상태면
-        if request.method=="POST":
-            nickname=request.user.last_name
-            title=request.POST['title']
-            price=request.POST['price']
-            photo=request.FILES('photo',None)
-            content=request.POST['content']
-            pdata=Post(username=nickname,content=content,price=price,title=title,photo=photo)
-            pdata.save()
-            return redirect('쇼핑목록페이지')
-        return render(request,"deal.html")
-    else:
-        redirect("main:index")
+    nickname=request.POST['username']
+    title=request.POST['title']
+    price=request.POST['price']
+    photo=request.FILES('photo',None)
+    content=request.POST['content']
+    pdata=Post(username=nickname,content=content,price=price,title=title,photo=photo)
+    pdata.save()
+    return redirect('쇼핑목록페이지')
 
 #게시글 삭제(기능)
 '''
@@ -104,4 +100,16 @@ def page_array(request):
 
     return render(request, 'home.html', {'posts': posts, 'Board': board, 'sort': sort})
 
-#html- 게시글페이지, 게시글 누른후 페이지
+@require_POST
+def likes(request, article_pk):
+    if request.user.is_authenticated:
+        article = get_object_or_404(Post, pk=article_pk)
+
+        if article.like_users.filter(pk=request.user.pk).exists():
+            article.like_users.remove(request.user)
+        else:
+            article.like_users.add(request.user)
+        return redirect('쇼핑목록페이지') # 좋아요 누르면 새로고침
+    return render(request, 'login_resist_form.html') # 로그인 안되 있으면 로그인 창으로 이동
+
+#html- 게시글페이지, 게시글 누른후 페이지, 게시글 작성페이지
