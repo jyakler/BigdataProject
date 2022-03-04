@@ -8,4 +8,5 @@ urlpatterns=[
     path('pcreate/',views.p_create,name='pC'),
     path('delete/',views.delete,name='delete'),
     path('<int:article_pk>/likes/', views.likes, name='likes'),
+    path('array/',views.page_array, name="page_array"),
 ]

@@ -94,19 +94,16 @@ def sold_out(request, post_id):
 #게시글 정렬(기능) - 최신순, 가격순
 def page_array(request):
     sort = request.GET.get('sort', '')
-    if sort == 'title':
-        post_list = Post.objects.all().order_by('-title', '-created at') #제목 가나다 순으로 정렬
-    elif sort == 'price':
-        post_list = Post.objects.all().order_by('-price', '-created at') # 가격 순으로 정렬
+    if sort == 'price':
+        post_list = Post.objects.all().order_by('-price', 'created_at') # 가격 순으로 정렬
     else:
-        post_list = Post.objects.all().order_by('-created at') # 날짜 순으로 정렬
+        post_list = Post.objects.all().order_by('created_at') # 날짜 순으로 정렬
 
-    paginator = Paginator(post_list, 5)
+    paginator = Paginator(post_list, 10)
     page = request.GET.get('page', 1)
     posts = paginator.get_page(page)
-    board = Post.objects.all()
 
-    return render(request, 'home.html', {'posts': posts, 'Board': board, 'sort': sort})
+    return render(request, 'result.html', {'plist': posts, 'page': page, 'sort': sort})
 
 @require_POST
 def likes(request, article_pk):

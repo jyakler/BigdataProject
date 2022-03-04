@@ -47,11 +47,37 @@
 				</div>
 			</div>
 		</header>
+
 		<main class="contents">
 			<div class="w_inner">
 				<!-- 상품 리스트 영역 -->
 				<div class="result_prod">
 					<span class="blind">검색 결과 상품 리스트</span>
+
+  <!--정렬-->
+  <form method="GET" action="{% url 'page_array' %}">
+  <div class="col-4">
+    <select name="sort" id="sort">
+      <option value="price" id="price">가격순</option>
+      <option value="-created_at" id="-created_at">날짜순</option>
+    </select>
+    <button class="btn btn-primary" type="submit" value="">정렬</button>
+  </div>
+
+  <!--pagenation-->
+  <div class="pagination">
+    {% if plist.has_previous %}
+      <a href="?page=1&sort={{sort}}">First</a>
+      <a href="?page={{plist.previous_page_number}}&sort={{sort}}">Previous</a>
+    {% endif %}
+
+    <span>{{plist.number}} / {{plist.paginator.num_pages}}</span>
+
+    {% if plist.has_next %}
+      <a href="?page={{plist.next_page_number}}&sort={{sort}}">Next</a>
+      <a href="?page={{plist.next_page_number}}&sort={{sort}}">Last</a>
+    {% endif %}
+
 					<table class="list_prod">
 						{% for pdata in plist %}
 						<tr>
@@ -74,6 +100,8 @@
 			</div>
 		</main>
 	</div>
+  </div>
+  </form>
 </body>
 
 </html>
