@@ -14,7 +14,11 @@
 		<header class="header">
 			<div class="header_top">
 				<div class="w_inner">
-					<a href="#none" class="link_txt">로그인/회원가입</a>
+					{% if not user.is_authenticated %}
+						<a href="/bookL/login" class="link_txt">로그인/회원가입</a>
+					{% else %}
+						<a href= "/bookL/logout"  class="link_txt">로그아웃</a>
+					{% endif %}
 					<a href="#none" class="link_txt">내상점</a>
 				</div>
 			</div>
@@ -24,18 +28,20 @@
 					<h1 class="logo_tit"><a href="#none" class="link_home">BOOK XXXXX</a></h1>
 					<!-- 검색창 -->
 					<div class="box_search">
-						<form action="#">
+						<form action="{% url 'search' %}" method="GET" >
 							<fieldset>
 								<legend class="blind">검색하기</legend>
 								<div class="search_area">
-									<input type="text" class="input" placeholder="검색어를 입력해주세요.">
+									<input type="text" class="input" placeholder="검색어를 입력해주세요." name=”title”>
 									<button type="submit" class="btn_search"><span class="blind">검색</span></button>
 								</div>
 							</fieldset>
 						</form>
 					</div>
 					<div class="wrap_utils">
-						<button class="btn_util"><span class="ico_comm ico_sell"></span>판매하기</button>
+						{% if user.is_authenticated %}
+						<button class="btn_util"><span class="ico_comm ico_sell"></span><a href="{% url 'pC' %}">판매하기</a></button>
+						{% endif %}
 						<button class="btn_util"><span class="ico_comm ico_chat"></span>XX톡</button>
 					</div>
 				</div>
