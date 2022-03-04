@@ -5,6 +5,7 @@ from bookL.models import Post, Reply
 from django.core.paginator import Paginator
 from django.utils import timezone
 from django.views.decorators.http import require_POST
+from django.db.models import Q
 
 #게시글(쇼핑목록) 페이지
 def board_list(request):
@@ -32,7 +33,7 @@ def shopping2(request,pk):
 def search(request):
     page = request.GET.get('page', 1)
     title=request.GET.get('title')
-    plist=Post.objects.filter(title=title)
+    plist=Post.objects.filter(Q(title__icontains=title) | Q(content__icontains=title))
     paginator=Paginator(plist,10)
     plistpage=paginator.get_page(page)
     context={'plist':plistpage}
