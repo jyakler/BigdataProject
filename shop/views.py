@@ -95,6 +95,16 @@ def reply_create(request):
     return redirect("페이지")
 
 #댓글 수정
+def reply_edit(request, post_id):
+    post = get_object_or_404(Reply, pk=post_id)
+    if request.method == "POST":
+        post = get_object_or_404(Reply, pk=post_id)
+        post.content = request.GET['content']
+        post.save()
+        return redirect('main:index')   # 작성 후에 메인페이지로 이동
+
+    else:
+        return render(request,'deal.html',{'post':post}) # 수정버튼 누르면 작성게시글 불러오기
 
 #댓글 삭제
 def reply_delete(request):
