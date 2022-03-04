@@ -6,7 +6,7 @@
 	<meta http-equiv="X-UA-Compatible" content="IE=edge">
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BOOK XXXXX</title>
-	<link rel="stylesheet" href="./css/result.css">
+	<link rel="stylesheet" href="/static/css/result.css">
 </head>
 
 <body>
@@ -52,78 +52,23 @@
 				<!-- 상품 리스트 영역 -->
 				<div class="result_prod">
 					<span class="blind">검색 결과 상품 리스트</span>
-
 					<table class="list_prod">
+						{% for pdata in plist %}
 						<tr>
 							<td class="thumb_img">
-								<img src="./images/img_item01.jpg" alt="">
+								<img src="{{pdata.photo.url}}" alt="">
 							</td>
 							<td class="tit_prod">
-								{{ title }}
+								{{ pdata.title }}
 							</td>
 							<td class="price_prod">
-								<em class="num_price">{{ price }}</em>원
+								<em class="num_price">{{ pdata.price }}</em>원
 							</td>
 							<td class="date_prod">
-								{{ date }}
+								{{ pdata.date }}
 							</td>
 						</tr>
-						<tr>
-							<td class="thumb_img">
-								<img src="./images/img_item02.jpg" alt="">
-							</td>
-							<td class="tit_prod">
-								{{ title }}
-							</td>
-							<td class="price_prod">
-								<em class="num_price">{{ price }}</em>원
-							</td>
-							<td class="date_prod">
-								{{ date }}
-							</td>
-						</tr>
-						<tr>
-							<td class="thumb_img">
-								<img src="./images/img_item03.jpg" alt="">
-							</td>
-							<td class="tit_prod">
-								{{ title }}
-							</td>
-							<td class="price_prod">
-								<em class="num_price">{{ price }}</em>원
-							</td>
-							<td class="date_prod">
-								{{ date }}
-							</td>
-						</tr>
-						<tr>
-							<td class="thumb_img">
-								<img src="./images/img_item04.jpg" alt="">
-							</td>
-							<td class="tit_prod">
-								{{ title }}
-							</td>
-							<td class="price_prod">
-								<em class="num_price">{{ price }}</em>원
-							</td>
-							<td class="date_prod">
-								{{ date }}
-							</td>
-						</tr>
-						<tr>
-							<td class="thumb_img">
-								<img src="./images/img_item05.jpg" alt="">
-							</td>
-							<td class="tit_prod">
-								{{ title }}
-							</td>
-							<td class="price_prod">
-								<em class="num_price">{{ price }}</em>원
-							</td>
-							<td class="date_prod">
-								{{ date }}
-							</td>
-						</tr>
+						{% endfor %}
 					</table>
 				</div>
 			</div>

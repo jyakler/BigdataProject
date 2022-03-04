@@ -8,11 +8,11 @@ from django.views.decorators.http import require_POST
 
 #게시글(쇼핑목록) 페이지
 def board_list(request):
-    all_boards = Post.objects.all().order_by('-created at') #Board는 게시글 작성 함수 이름임, 최신게시글이 맨 위에
+    all_boards = Post.objects.all().order_by('-created_at') #Board는 게시글 작성 함수 이름임, 최신게시글이 맨 위에
     page = int(request.GET.get('p', 1)) # 현재 페이지를 나타냄
     paginator = Paginator(all_boards, 6) # 한 페이지에 게시물 6개 보임
     boards = paginator.get_page(page) # 해당 페이지 번호를 리턴받아 현재 페이지를 나타냄
-    return render(request, 'board_list.html', {'boards':boards}) # 게시판 html이 board_list.html
+    return render(request, 'result.html', {'plist':boards}) # 게시판 html이 board_list.html
 
 #게시글 누른후 페이지
 '''
@@ -36,7 +36,7 @@ def search(request):
     paginator=Paginator(plist,10)
     plistpage=paginator.get_page(page)
     context={'plist':plistpage}
-    return render(request,'쇼핑목록페이지',context)
+    return render(request,'result.html',context)
 
 #게시글 작성(판매하기 게시판)
 def p_create(request):
@@ -51,7 +51,7 @@ def p_create(request):
             print(id,title,price,content)
             pdata=Post(title=title,username=id,price=price,content=content,photo=photo)
             pdata.save()
-            return redirect('게시글 누른페이지')
+            return redirect('result')
         return render(request,"deal.html")
     else:
         redirect("main:index")
@@ -64,7 +64,7 @@ def delete(request):
     pk=request.GET['pk']
     post=Post.objects.get(pk=pk)
     post.delete()
-    return redirect("쇼핑목록페이지")
+    return redirect("main:index")
 
 #댓글 작성
 def reply_create(request):
