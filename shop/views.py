@@ -32,6 +32,7 @@ def shopping2(request,pk):
 def search(request):
     page = request.GET.get('page', 1)
     title=request.GET.get('title')
+    print(title)
     plist=Post.objects.filter(title=title)
     paginator=Paginator(plist,10)
     plistpage=paginator.get_page(page)
