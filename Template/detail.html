@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BOOK XXXXX</title>
+	<link rel="stylesheet" href="./css/detail.css">
+</head>
+
+<body>
+	<div class="container">
+		<header class="header">
+			<div class="header_top">
+				<div class="w_inner">
+					<a href="#none" class="link_txt">로그인/회원가입</a>
+					<a href="#none" class="link_txt">내상점</a>
+				</div>
+			</div>
+			<div class="header_cont">
+				<div class="w_inner">
+					<!-- 로고 -->
+					<h1 class="logo_tit"><a href="#none" class="link_home">BOOK XXXXX</a></h1>
+					<!-- 검색창 -->
+					<div class="box_search">
+						<form action="#">
+							<fieldset>
+								<legend class="blind">검색하기</legend>
+								<div class="search_area">
+									<input type="text" class="input" placeholder="검색어를 입력해주세요.">
+									<button type="submit" class="btn_search"><span class="blind">검색</span></button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="wrap_utils">
+						<button class="btn_util"><span class="ico_comm ico_sell"></span>판매하기</button>
+						<button class="btn_util"><span class="ico_comm ico_chat"></span>XX톡</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="contents">
+			<div class="w_inner">
+				<div class="wrap_prod_detail">
+					<!-- 상품 -->
+					<div class="prod_detail">
+						<div class="prod_thumb">
+							<img src="./images/img_item01.jpg" alt="">
+						</div>
+						<div class="prod_info">
+							<h2 class="tit_prod">{{ title }}</h2>
+							<strong class="price_prod"><em class="num_price">{{ price }}</em> 원</strong>
+
+							<dl class="list_data">
+								<div class="group_data">
+									<dt>상품 상태</dt>
+									<dd>새상품</dd>
+								</div>
+								<div class="group_data">
+									<dt>교환여부</dt>
+									<dd>교환불가능</dd>
+								</div>
+								<div class="group_data">
+									<dt>배송비</dt>
+									<dd>배송비포함</dd>
+								</div>
+								<div class="group_data">
+									<dt>거래지역</dt>
+									<dd>전국</dd>
+								</div>
+							</dl>
+
+							<div class="wrap_btn">
+								<button class="btn normal">찜</button>
+								<button class="btn point">연락하기</button>
+								<button class="btn stress">바로구매</button>
+							</div>
+						</div>
+					</div>
+
+					<!-- 상품 정보 -->
+					<div class="prod_desc">
+						<h3 class="tit_txt">상품정보</h3>
+
+						<!-- 작성자 작성한 상품 설명 -->
+						<div class="desc_detail">
+							채사장의 지대넓얕 2: 자본이라는 신<br>
+							<br><br>
+							글 먼저 읽고 연락주세요
+							<br>
+							미사용 새 책 + 무료배송 / 네고(에누리)
+							<br>
+						</div>
+						<dl class="list_desc">
+							<div class="group_desc">
+								<dt>거래지역</dt>
+								<dd>전국</dd>
+							</div>
+							<div class="group_desc">
+								<dt>카테고리</dt>
+								<dd>기타(도서)</dd>
+							</div>
+						</dl>
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+
+</html>
