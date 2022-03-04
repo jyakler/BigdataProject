@@ -57,6 +57,21 @@ def p_create(request):
     else:
         redirect("main:index")
 
+#게시글 수정(기능)
+def p_edit(request, post_id):
+    post = get_object_or_404(Post, pk=post_id)
+    if request.method == "POST":
+        post = get_object_or_404(Post, pk=post_id)
+        post.title = request.GET['title']
+        post.price = request.POST['price']
+        post.photo = request.FILE['photo']
+        post.content = request.GET['content']
+        post.save()
+        return redirect('main:index')   # 작성 후에 메인페이지로 이동
+
+    else:
+        return render(request,'deal.html',{'post':post}) # 수정버튼 누르면 작성게시글 불러오기
+
 #게시글 삭제(기능)
 '''
 html 에서 쿼리로 pk정보 받아와야함
@@ -71,13 +86,22 @@ def delete(request):
 def reply_create(request):
     content = request.GET['content']
     pk = request.GET['pk']
-    post = Post.objects.get(pk=pk)  # pk=pk, id=pk
+    post = Reply.objects.get(pk=pk)  # pk=pk, id=pk
     rdata = Reply(content=content, post_id=post)
     rdata.save()
     comment = Reply()
     comment.user = request.user # request.user는 현재 접속한 유저의 정보
     #위 정보가 필요한가?
     return redirect("페이지")
+
+#댓글 수정
+
+#댓글 삭제
+def reply_delete(request):
+    pk=request.GET['pk']
+    reply=Reply.objects.get(pk=pk)
+    reply.delete()
+    return redirect("main:index")
 
 #판매완료(기능)
 def sold_out(request, post_id):
