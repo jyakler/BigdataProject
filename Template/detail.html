@@ -14,11 +14,11 @@
 		<header class="header">
 			<div class="header_top">
 				<div class="w_inner">
-					{% if not logineduser %}
+					{% if not user.is_authenticated %}
 						<a href="/bookL/login" class="link_txt">로그인/회원가입</a>
 					{% else %}
 						<a href= "/bookL/logout"  class="link_txt">로그아웃</a>
-					 {% endif %}
+					{% endif %}
 					<a href="#none" class="link_txt">내상점</a>
 				</div>
 			</div>
