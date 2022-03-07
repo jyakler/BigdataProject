@@ -79,7 +79,9 @@
 							</dl>
 
 							<div class="wrap_btn">
-								<button class="btn normal">찜</button>
+								    <div id="container2">
+									  <div class="heart-like-button"></div>
+									</div>
 								<button class="btn point">연락하기</button>
 								<button class="btn stress">바로구매</button>
 							</div>
@@ -134,4 +136,15 @@
 	</div>
 </body>
 
+<script>
+const button = document.querySelector(".heart-like-button");
+
+button.addEventListener("click", () => {
+  if (button.classList.contains("liked")) {
+    button.classList.remove("liked");
+  } else {
+    button.classList.add("liked");
+  }
+});
+</script>
 </html>
