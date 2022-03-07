@@ -22,8 +22,15 @@ post자체의 정보(모델클래스)
 '''
 def shopping2(request,pk):
      post=Post.objects.get(pk=pk)
-     context={"post":post}
-     return render(request,'누른후페이지',context)
+     replylist = []
+     try:
+        replylist=Reply.objects.filter(post_id=pk)
+     except:
+        print("null")
+     for a in replylist:
+         print(a.content)
+     context={"post":post, "reply":replylist}
+     return render(request,'detail.html',context)
 
 #검색-제목(기능)
 '''
@@ -84,15 +91,15 @@ def delete(request):
 
 #댓글 작성
 def reply_create(request):
-    content = request.GET['content']
     pk = request.GET['pk']
-    post = Reply.objects.get(pk=pk)  # pk=pk, id=pk
-    rdata = Reply(content=content, post_id=post)
+    content = request.POST['content']
+    post = Post.objects.get(pk=pk)  # pk=pk, id=pk
+    rdata = Reply(content=content, post_id=post, username=request.user)
     rdata.save()
     comment = Reply()
     comment.user = request.user # request.user는 현재 접속한 유저의 정보
     #위 정보가 필요한가?
-    return redirect("페이지")
+    return shopping2(request,pk)
 
 #댓글 수정
 def reply_edit(request, post_id):
