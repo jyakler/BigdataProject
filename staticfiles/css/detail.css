@@ -1,4 +1,4 @@
-html, body, div, span, applet, object, iframe,
+ html, body, div, span, applet, object, iframe,
 h1, h2, h3, h4, h5, h6, p, blockquote, pre,
 a, abbr, acronym, address, big, cite, code,
 del, dfn, em, img, ins, kbd, q, s, samp,
@@ -548,13 +548,13 @@ html {
 .heart-like-button:before {
     position: absolute;
     top: 0;
-    left: 40px;
+    left: 30px;
     transform: rotate(-45deg);
     transform-origin: 0 100%;
-    width: 40px;
-    height: 60px;
+    width: 30px;
+    height: 50px;
     border-radius: 20px 20px 0 0;
-    background-color: #574136;
+    background-color: #ff0011;
     content: "";
     cursor: pointer;
     transition: background .4s;
@@ -565,17 +565,18 @@ html {
     left: 0;
     transform: rotate(45deg);
     transform-origin :100% 100%;
-    width: 40px;
-    height: 60px;
+    width: 30px;
+    height: 50px;
     border-radius: 20px 20px 0 0;
-    background-color: #574136;
+    background-color: #ff0011;
     content: "";
     cursor: pointer;
     transition: background .4s;
 }
 .heart-like-button.liked::before,
 .heart-like-button.liked::after {
-  background-color: #d65076;
+  background-color: white;
+  border: 1px solid red;
 }
 .heart-like-button.liked {
   animation: liked .4s ease;
