@@ -61,28 +61,33 @@
 
 							<dl class="list_data">
 								<div class="group_data">
-									<dt>상품 상태</dt>
-									<dd>새상품</dd>
+									<dt>닉네임</dt>
+									<dd>{{r.username.last_name}}&nbsp;</dd>
 								</div>
 								<div class="group_data">
-									<dt>교환여부</dt>
-									<dd>교환불가능</dd>
+									<dt>작성일</dt>
+									<dd>{{post.created}}</dd>
 								</div>
-								<div class="group_data">
-									<dt>배송비</dt>
-									<dd>배송비포함</dd>
-								</div>
-								<div class="group_data">
-									<dt>거래지역</dt>
-									<dd>전국</dd>
-								</div>
-							</dl>
 
 							<div class="wrap_btn">
 								    <div id="container2">
-									  <div class="heart-like-button"></div>
+								  <form action="{% url 'likes' post.pk %}" method='POST'>
+									{% csrf_token %}
+									{% if user in article.like_users.all %}
+									  <button type="submit">
+										  <div class="heart-like-button">
+											  </div>
+										  </button>
+									{% else %}
+									  <button type="submit">
+										  <div class="heart-like-button">
+											  </div>
+										  </button>
+									{% endif %}
+								  </form>
+									  </div>
+										<button class="btn point">채팅하기</button>
 									</div>
-								<button class="btn point">연락하기</button>
 							</div>
 						</div>
 					</div>
