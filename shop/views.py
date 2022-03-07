@@ -155,7 +155,7 @@ def likes(request, article_pk):
             article.like_users.remove(request.user)
         else:
             article.like_users.add(request.user)
-        return redirect('result') # 좋아요 누르면 새로고침
+        return shopping2(request,article_pk) # 좋아요 누르면 새로고침
     return render(request, 'login_resist_form.html') # 로그인 안되 있으면 로그인 창으로 이동
 
 #html- 게시글페이지, 게시글 누른후 페이지

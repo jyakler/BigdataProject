@@ -73,14 +73,14 @@
 								    <div id="container2">
 								  <form action="{% url 'likes' post.pk %}" method='POST'>
 									{% csrf_token %}
-									{% if user in article.like_users.all %}
+									{% if username in user.like_users %}
 									  <button type="submit">
 										  <div class="heart-like-button">
 											  </div>
 										  </button>
 									{% else %}
 									  <button type="submit">
-										  <div class="heart-like-button">
+										  <div class="heart-like-button liked">
 											  </div>
 										  </button>
 									{% endif %}
