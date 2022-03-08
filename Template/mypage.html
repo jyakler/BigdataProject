@@ -56,7 +56,7 @@
 						<span class="ico_store">
 							<img src="/static/images/ico_store.jpg" alt="상점이미지" class="img_g">
 						</span>
-						<strong class="name_store">푸시푸시베베</strong>
+						<strong class="name_store">{{user.last_name}}</strong>
 						<div class="area_btn">
 							<a href="#none" class="btn medium">내 상점 관리</a>
 						</div>
@@ -80,7 +80,7 @@
 					<div id="skip_1" class="skip_content active">
 						<div class="wrap_tit">
 							<div class="tit_txt">
-								상품<span class="em stress">2</span>
+								상품<span class="em stress">{{plist.count}}</span>
 							</div>
 							<div class="util_sorting">
 								<select name="" id="" class="select">
@@ -90,7 +90,7 @@
 						</div>
 						<div class="area_sorting">
 							<div class="tit_txt">
-								전체<span class="em normal">2개</span>
+								전체<span class="em normal">{{plist.count}}개</span>
 							</div>
 							<div class="util_sorting">
 								<ul class="list_sorting">
@@ -128,6 +128,7 @@
 										{{ pdata.created_at }}
 									</td>
 								</tr>
+								{% endfor %}
 							</table>
 						</div>
 					</div>

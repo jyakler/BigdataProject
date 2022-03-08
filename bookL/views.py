@@ -65,16 +65,15 @@ def register(request):
             user=User.objects.create_user(username=useremail,last_name=nickname,
                                           password=password)
             auth.login(request,user)
-            print("여기까지?")
             return redirect('main:index')
     return render(request,'login_resist_form.html',res_data)
 
 #마이페이지
 def mypage(request):
-    context=None
+    plist=[]
     if request.user.is_authenticated:
         plist=Post.objects.filter(username=request.user)
-        context={'user':request.user, 'plist':plist}
+    context={'user':request.user, 'plist':plist}
     return render(request,'mypage.html',context)
 #html- 마이페이지
 
