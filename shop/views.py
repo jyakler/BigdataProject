@@ -43,7 +43,7 @@ def search(request):
     plist=Post.objects.filter(Q(title__icontains=title) | Q(content__icontains=title))
     paginator=Paginator(plist,10)
     plistpage=paginator.get_page(page)
-    context={'plist':plistpage}
+    context={'plist':plistpage, "title":title}
     return render(request,'result.html',context)
 
 #게시글 작성(판매하기 게시판)
