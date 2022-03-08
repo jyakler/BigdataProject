@@ -135,10 +135,11 @@ def sold_out(request, post_id):
 #게시글 정렬(기능) - 최신순, 가격순
 def page_array(request):
     sort = request.GET.get('sort', '')
+    title=request.GET.get('title')
     if sort == 'price':
-        post_list = Post.objects.all().order_by('-price', 'created_at') # 가격 순으로 정렬
+        post_list = Post.objects.filter(Q(title__icontains=title) | Q(content__icontains=title)).order_by('-price', 'created_at') # 가격 순으로 정렬
     else:
-        post_list = Post.objects.all().order_by('created_at') # 날짜 순으로 정렬
+        post_list = Post.objects.filter(Q(title__icontains=title) | Q(content__icontains=title)).order_by('created_at') # 날짜 순으로 정렬
 
     paginator = Paginator(post_list, 10)
     page = request.GET.get('page', 1)
