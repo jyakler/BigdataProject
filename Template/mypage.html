@@ -1,0 +1,210 @@
+<!DOCTYPE html>
+<html lang="ko">
+
+<head>
+	<meta charset="UTF-8">
+	<meta http-equiv="X-UA-Compatible" content="IE=edge">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>BOOK XXXXX</title>
+	<link rel="stylesheet" href="/static/css/mypage.css">
+	<script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
+	<script src="./js/common.ui.js"></script>
+</head>
+
+<body>
+	<div class="container">
+		<header class="header">
+			<div class="header_top">
+				<div class="w_inner">
+					{% if not user.is_authenticated %}
+						<a href="/bookL/login" class="link_txt">로그인/회원가입</a>
+					{% else %}
+						<a href= "/bookL/logout"  class="link_txt">로그아웃</a>
+						<a href="/bookL/mypage" class="link_txt">내상점</a>
+					{% endif %}
+				</div>
+			</div>
+			<div class="header_cont">
+				<div class="w_inner">
+					<!-- 로고 -->
+					<h1 class="logo_tit"><a href="/bookL/" class="link_home">BOOK XXXXX</a></h1>
+					<!-- 검색창 -->
+					<div class="box_search">
+						<form action="{% url 'search' %}" method="GET" >
+							<fieldset>
+								<legend class="blind">검색하기</legend>
+								<div class="search_area">
+									<input type="text" class="input" placeholder="검색어를 입력해주세요." name="title">
+									<button type="submit" class="btn_search"><span class="blind">검색</span></button>
+								</div>
+							</fieldset>
+						</form>
+					</div>
+					<div class="wrap_utils">
+						{% if user.is_authenticated %}
+						<button class="btn_util"><span class="ico_comm ico_sell"></span><a href="{% url 'pC' %}">판매하기</a></button>
+						{% endif %}
+						<button class="btn_util"><span class="ico_comm ico_chat"></span>XX톡</button>
+					</div>
+				</div>
+			</div>
+		</header>
+		<main class="contents my_contents">
+			<div class="w_inner">
+				<div class="wrap_info_store">
+					<div class="thumb_store">
+						<span class="ico_store">
+							<img src="/static/images/ico_store.jpg" alt="상점이미지" class="img_g">
+						</span>
+						<strong class="name_store">{{user.last_name}}</strong>
+						<div class="area_btn">
+							<a href="#none" class="btn medium">내 상점 관리</a>
+						</div>
+					</div>
+					<div class="info_store">
+						<dl class="list_info">
+							<dt>상점오픈일</dt>
+							<dd>449 일 전</dd>
+						</dl>
+					</div>
+				</div>
+				<div class="wrap_tab">
+					<ul class="skip_nav">
+						<li class="current"><a href="#skip_1">상품 5</a></li>
+						<li><a href="#skip_2">찜 2</a></li>
+						<li><a href="#skip_3">상점후기 0</a></li>
+					</ul>
+				</div>
+				<div class="skip_container">
+					<!-- 상품 2 콘텐츠 영역 -->
+					<div id="skip_1" class="skip_content active">
+						<div class="wrap_tit">
+							<div class="tit_txt">
+								상품<span class="em stress">{{plist.count}}</span>
+							</div>
+							<div class="util_sorting">
+								<select name="" id="" class="select">
+									<option value="">전체</option>
+								</select>
+							</div>
+						</div>
+						<div class="area_sorting">
+							<div class="tit_txt">
+								전체<span class="em normal">{{plist.count}}개</span>
+							</div>
+							<div class="util_sorting">
+								<ul class="list_sorting">
+									<li>
+										<!-- 활성화시 .active 클래스 추가 -->
+										<button class="btn active">최신순</button>
+									</li>
+									<li>
+										<button class="btn">인기순</button>
+									</li>
+									<li>
+										<button class="btn">저가순</button>
+									</li>
+									<li>
+										<button class="btn">고가순</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="wrap_prod">
+							<!-- 상품 리스트 -->
+							<table class="list_prod"><!-- for문  -->
+								{% for pdata in plist %}
+								<tr onclick="location.href='/shop/shopping/{{ pdata.pk }}/'">
+									<td class="thumb_img">
+										<img src="{{pdata.photo.url}}" alt="">
+									</td>
+									<td class="tit_prod">
+										{{ pdata.title }}
+									</td>
+									<td class="price_prod">
+										<em class="num_price">{{ pdata.price }}</em>원
+									</td>
+									<td class="date_prod">
+										{{ pdata.created_at }}
+									</td>
+								</tr>
+								{% endfor %}
+							</table>
+						</div>
+					</div>
+					<!-- 찜 콘텐츠 영역 -->
+					<div id="skip_2" class="skip_content">
+						<div class="wrap_tit">
+							<div class="tit_txt">
+								찜<span class="em stress">1</span>
+							</div>
+						</div>
+						<div class="area_sorting sorting_right">
+							<div class="util_sorting">
+								<ul class="list_sorting">
+									<li>
+										<!-- 활성화시 .active 클래스 추가 -->
+										<button class="btn active">최신순</button>
+									</li>
+									<li>
+										<button class="btn">인기순</button>
+									</li>
+									<li>
+										<button class="btn">저가순</button>
+									</li>
+									<li>
+										<button class="btn">고가순</button>
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="wrap_prod">
+							<ul class="list_prod type_2">
+								<li>
+									<div class="thumb_img">
+										<img src="./images/img_item05.jpg" alt="">
+									</div>
+									<span class="tit_prod">
+										{{ title }}
+									</span>
+									<span class="price_prod">
+										<em class="num_price">{{ price }}</em>원
+									</span>
+									<span class="date_prod">
+										{{ date }}
+									</span>
+									<p class="location_prod">
+										대구광역시 중구 동인동 2가
+									</p>
+								</li>
+								<li>
+									<div class="thumb_img">
+										<img src="./images/img_item05.jpg" alt="">
+									</div>
+									<span class="tit_prod">
+										{{ title }}
+									</span>
+									<span class="price_prod">
+										<em class="num_price">{{ price }}</em>원
+									</span>
+									<span class="date_prod">
+										{{ date }}
+									</span>
+									<p class="location_prod">
+										대구광역시 중구 동인동 2가
+									</p>
+								</li>
+							</ul>
+						</div>
+					</div>
+					<!-- 상점 후기 콘텐츠 영역 -->
+					<div id="skip_3" class="skip_content">
+						contents3
+					</div>
+				</div>
+			</div>
+		</main>
+	</div>
+</body>
+
+</html>
