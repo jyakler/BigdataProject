@@ -16,9 +16,9 @@
 				<div class="w_inner">
 					{% if not user.is_authenticated %}
 						<a href="/bookL/login" class="link_txt">로그인/회원가입</a>
-						<a href="/bookL/mypage" class="link_txt">내상점</a>
 					{% else %}
 						<a href= "/bookL/logout"  class="link_txt">로그아웃</a>
+						<a href="/bookL/mypage" class="link_txt">내상점</a>
 					{% endif %}
 				</div>
 			</div>

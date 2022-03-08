@@ -1,7 +1,7 @@
 from django.shortcuts import render, redirect
 from django.contrib.auth.models import User
 from django.contrib import auth
-
+from bookL.models import Post
 #메인페이지
 def index(request):
     context=None
@@ -73,7 +73,8 @@ def register(request):
 def mypage(request):
     context=None
     if request.user.is_authenticated:
-        context={'user':request.user}
+        plist=Post.objects.filter(username=request.user)
+        context={'user':request.user, 'plist':plist}
     return render(request,'mypage.html',context)
 #html- 마이페이지
 
