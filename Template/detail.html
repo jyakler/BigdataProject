@@ -90,6 +90,11 @@
 										<p>{{post.like_users.count }}명이 좋아합니다.</p>
 										</div>
 										<button class="btn point">채팅하기</button>
+										<form method="POST">
+										  {% csrf_token %}
+										<button class="btn point" onclick="location.href='/p_edit/{{ post.pk }}'">수정하기</button>
+										<button class="btn point" onclick="location.href='{{ post.pk }}/delete/'">삭제하기</button>
+										</form>
 									</div>
 							</div>
 						</div>

@@ -92,23 +92,6 @@
 							<div class="tit_txt">
 								전체<span class="em normal">{{plist.count}}개</span>
 							</div>
-							<div class="util_sorting">
-								<ul class="list_sorting">
-									<li>
-										<!-- 활성화시 .active 클래스 추가 -->
-										<button class="btn active">최신순</button>
-									</li>
-									<li>
-										<button class="btn">인기순</button>
-									</li>
-									<li>
-										<button class="btn">저가순</button>
-									</li>
-									<li>
-										<button class="btn">고가순</button>
-									</li>
-								</ul>
-							</div>
 						</div>
 						<div class="wrap_prod">
 							<!-- 상품 리스트 -->
@@ -125,7 +108,7 @@
 										<em class="num_price">{{ pdata.price }}</em>원
 									</td>
 									<td class="date_prod">
-										{{ pdata.created_at }}
+										{{ pdata.created_at|date}}
 									</td>
 								</tr>
 								{% endfor %}
@@ -135,6 +118,24 @@
 					<!-- 찜 콘텐츠 영역 -->
 					<div id="skip_2" class="skip_content">
 						<div class="wrap_tit">
+							<table class="list_prod"><!-- for문  -->
+								{% for pdata in plist %}
+								<tr onclick="location.href='/{{ pdata.pk }}/shop/likes/'">
+									<td class="thumb_img">
+										<img src="{{pdata.photo.url}}" alt="">
+									</td>
+									<td class="tit_prod">
+										{{ pdata.title }}
+									</td>
+									<td class="price_prod">
+										<em class="num_price">{{ pdata.price }}</em>원
+									</td>
+									<td class="date_prod">
+										{{ pdata.created_at }}
+									</td>
+								</tr>
+								{% endfor %}
+							</table>
 							<div class="tit_txt">
 								찜<span class="em stress">1</span>
 							</div>

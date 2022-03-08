@@ -10,4 +10,6 @@ urlpatterns=[
     path('<int:article_pk>/likes/', views.likes, name='likes'),
     path('array/',views.page_array, name="page_array"),
     path('replyC/',views.reply_create,name="rC"),
+    path('<int:pk>/p_edit/',views.p_edit,name='p_edit'),
+    path('<pk>/delete/',views.delete,name='delete'),
 ]

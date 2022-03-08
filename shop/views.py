@@ -65,19 +65,20 @@ def p_create(request):
         redirect("main:index")
 
 #게시글 수정(기능)
-def p_edit(request, post_id):
-    post = get_object_or_404(Post, pk=post_id)
+
+def p_edit(request, pk):
+    post = Post.objects.get(id=pk)
     if request.method == "POST":
-        post = get_object_or_404(Post, pk=post_id)
-        post.title = request.GET['title']
+        post.title = request.POST['title']
         post.price = request.POST['price']
-        post.photo = request.FILE['photo']
-        post.content = request.GET['content']
+        post.photo = request.POST['photo']
+        post.content = request.POST['content']
+
         post.save()
-        return redirect('main:index')   # 작성 후에 메인페이지로 이동
+        return redirect('result')
 
     else:
-        return render(request,'deal.html',{'post':post}) # 수정버튼 누르면 작성게시글 불러오기
+        return render(request, 'deal.html', {'post':post})
 
 #게시글 삭제(기능)
 '''
@@ -102,10 +103,10 @@ def reply_create(request):
     return shopping2(request,pk)
 
 #댓글 수정
-def reply_edit(request, post_id):
-    post = get_object_or_404(Reply, pk=post_id)
+def reply_edit(request, pk):
+    post = get_object_or_404(Reply, pk=pk)
     if request.method == "POST":
-        post = get_object_or_404(Reply, pk=post_id)
+        post = get_object_or_404(Reply, pk=pk)
         post.content = request.GET['content']
         post.save()
         return redirect('main:index')   # 작성 후에 메인페이지로 이동
@@ -137,7 +138,7 @@ def page_array(request):
     sort = request.GET.get('sort', '')
     title=request.GET.get('title')
     if sort == 'price':
-        post_list = Post.objects.filter(Q(title__icontains=title) | Q(content__icontains=title)).order_by('-price', 'created_at') # 가격 순으로 정렬
+        post_list = Post.objects.filter(Q(title__icontains=title) | Q(content__icontains=title)).order_by('price', 'created_at') # 가격 순으로 정렬
     else:
         post_list = Post.objects.filter(Q(title__icontains=title) | Q(content__icontains=title)).order_by('created_at') # 날짜 순으로 정렬
 
