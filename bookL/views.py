@@ -74,7 +74,7 @@ def mypage(request):
     context=None
     if request.user.is_authenticated:
         context={'user':request.user}
-    return render(request,'마이페이지',context)
+    return render(request,'mypage.html',context)
 #html- 마이페이지
 
 #------------------------------------------
