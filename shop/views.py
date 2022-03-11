@@ -67,18 +67,18 @@ def p_create(request):
 #게시글 수정(기능)
 
 def p_edit(request, pk):
-    post = Post.objects.get(id=pk)
+    post = Post.objects.get(pk=pk)
+
     if request.method == "POST":
         post.title = request.POST['title']
         post.price = request.POST['price']
-        post.photo = request.POST['photo']
+        post.photo = request.FILES.get('photo','')
         post.content = request.POST['content']
-
         post.save()
-        return redirect('result')
+        return render(request,"update.html",{'post' : post})
 
     else:
-        return render(request, 'deal.html', {'post':post})
+        redirect("main:index")
 
 #게시글 삭제(기능)
 '''
