@@ -7,7 +7,6 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BOOK XXXXX</title>
 	<link rel="stylesheet" href="/static/css/detail.css">
-	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<script src="https://kit.fontawesome.com/146957413a.js" crossorigin="anonymous"></script>
 </head>
 
@@ -92,6 +91,7 @@
 										</div>
 										<div id ='container3'>
 										<button class="btn point">채팅하기</button>
+											{% if request.user == post.username %}
 										<form action="{% url 'p_edit' post.pk %}"  method="POST">
 											{% csrf_token %}
 											<input type="hidden" name="title" value="{{post.title}}" class="input">
@@ -105,6 +105,7 @@
 											{% csrf_token %}
 											<button class='btn point' type="submit">삭제하기</button>
 										</form>
+											{% endif %}
 										</div>
 									</div>
 							</div>
@@ -138,7 +139,7 @@
 							<form action="{% url 'p_edit' post.pk  %}"  method="POST">
 							{% csrf_token %}
 							<input type="hidden" name="content" value="" class="input">
-							<button class="btn btn-danger" type = "submit">수정하기</button>
+							<button class = "btn btn-danger" type = "submit">수정하기</button>
 							</form><br>
 							<form action="{% url 'p_edit' post.pk  %}"  method="POST">
 							{% csrf_token %}
