@@ -7,6 +7,7 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>BOOK XXXXX</title>
 	<link rel="stylesheet" href="/static/css/detail.css">
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css">
 	<script src="https://kit.fontawesome.com/146957413a.js" crossorigin="anonymous"></script>
 </head>
 
@@ -126,21 +127,48 @@
 				</div>
 				<div>
 				<!-- 댓글 -->
+					<div class="prod_desc">
+						<h4 class="tit_txt">상품 문의</h4><br>
 					<div>
 						{% for r in reply %}
-						이름:{{r.username.last_name}}&nbsp;
-						내용:{{r.content}}<br>
-						{% endfor %}
+						<div class ="group_data">
+						<b>{{r.username.last_name}}</b>&ensp;<br>
+						<a>{{r.content}}</a>
+							<div class = 'button_group' >
+							<form action="{% url 'p_edit' post.pk  %}"  method="POST">
+							{% csrf_token %}
+							<input type="hidden" name="content" value="" class="input">
+							<button class="btn btn-danger" type = "submit">수정하기</button>
+							</form><br>
+							<form action="{% url 'p_edit' post.pk  %}"  method="POST">
+							{% csrf_token %}
+							<input type="hidden" name="content" value="" class="input">
+							<button class="btn btn-dark" type = "submit">삭제하기</button>
+							</form>
+								</div>
+							<br><br>
+						<div>
+						{% endfor %}<br><br>
 					</div>
 
 					{% if user.is_authenticated %}
 					<form action="{% url 'rC' %}?pk={{post.id}}" method="POST">
 						{% csrf_token %}
-						<input type="text" class="input" name="content" placeholder="댓글을 입력하세요.">
-						<button type="submit" class="btn_util">댓글입력</button>
+						<input type="text" class="input">
+						<div class="wrap_field">
+							<div class="box_write">
+								<textarea id="prodDesc" name="content" minlength="5" cols="130" rows="10" placeholder="상품 문의사항을 입력해주세요."></textarea>
+							</div>
+						</div>
+						<button class="btn btn-secondary" type="submit" >댓글입력</button>
 					</form>
 					{% endif %}
+					</div>
 				</div>
+					</div>
+
+				</div>
+
 			</div>
 		</main>
 	</div>
