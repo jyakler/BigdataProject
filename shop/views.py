@@ -84,8 +84,7 @@ def p_edit(request, pk):
 '''
 html 에서 쿼리로 pk정보 받아와야함
 '''
-def delete(request):
-    pk=request.GET['pk']
+def delete(request,pk):
     post=Post.objects.get(pk=pk)
     post.delete()
     return redirect("main:index")
