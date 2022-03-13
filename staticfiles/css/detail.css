@@ -620,3 +620,15 @@ html {
 	border-radius:.25rem;
 	transition:color .15s ease-in-out,background-color .15s ease-in-out,border-color .15s ease-in-out,box-shadow .15s ease-in-out
 }
+
+.btn-dark{
+	color:#fff;
+	background-color:#343a40;
+	border-color:#343a40
+}
+
+.btn-primary{
+	color:#fff;
+	background-color:#007bff;
+	border-color:#007bff
+}

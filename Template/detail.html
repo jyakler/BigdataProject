@@ -8,6 +8,7 @@
 	<title>BOOK XXXXX</title>
 	<link rel="stylesheet" href="/static/css/detail.css">
 	<script src="https://kit.fontawesome.com/146957413a.js" crossorigin="anonymous"></script>
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -124,10 +125,7 @@
 							<br>
 						</div>
 					</div>
-
-				</div>
-				<div>
-				<!-- 댓글 -->
+								<!-- 댓글 -->
 					<div class="prod_desc">
 						<h4 class="tit_txt">상품 문의</h4><br>
 					<div>
@@ -136,12 +134,23 @@
 						<b>{{r.username.last_name}}</b>&ensp;<br>
 						<a>{{r.content}}</a>
 							<div class = 'button_group' >
-							<form action="{% url 'p_edit' post.pk  %}"  method="POST">
+								<div id="ccform"  style="display:none">
+								  <h2>의견을 남겨 주세요!</h2>
+									<hr>
+									<form method="post" action="{% url 'rC' %}">
+										{% csrf_token %}
+										<textarea style="margin-top:5px" name="content" cols="60" rows="5" placeholder="자신의 의견을 간단히 적어주세요."></textarea>
+										</textarea><br>
+										<button type="submit" value="Submit">제출</button>
+										<button type="reset" value="Reset">재작성</button>
+									</form>
+								</div>
+							<form onclick="ajax_uu_request({{ r.pk }})">
 							{% csrf_token %}
 							<input type="hidden" name="content" value="" class="input">
 							<button class = "btn btn-danger" type = "submit">수정하기</button>
 							</form><br>
-							<form action="{% url 'p_edit' post.pk  %}"  method="POST">
+							<form action="{% url 'reply_delete' r.pk  %}"  method="POST">
 							{% csrf_token %}
 							<input type="hidden" name="content" value="" class="input">
 							<button class="btn btn-dark" type = "submit">삭제하기</button>
@@ -161,12 +170,17 @@
 								<textarea id="prodDesc" name="content" minlength="5" cols="130" rows="10" placeholder="상품 문의사항을 입력해주세요."></textarea>
 							</div>
 						</div>
-						<button class="btn btn-secondary" type="submit" >댓글입력</button>
+						<button class="btn btn-primary" type="submit" >댓글입력</button>
 					</form>
 					{% endif %}
 					</div>
 				</div>
 					</div>
+
+
+				</div>
+
+				<div>
 
 				</div>
 
@@ -174,5 +188,16 @@
 		</main>
 	</div>
 </body>
-
+<script>
+    function ajax_uu_request(pk) {
+        $.getJSON("{% url 'reply_edit' %}?pk="+pk, function(jsonObj) {
+           $('#ccform').css('display', 'block')
+           const dom1 = $('[name="content"]');
+           dom1.removeAttr("placeholder");
+           dom1.attr(jsonObj.content);
+           $('#ccform h2').text("글을 수정해 주세요")
+            $('#ccform form').attr("action", "{% url 'reply_edit' %}?pk="+pk)
+        });
+    }
+</script>
 </html>

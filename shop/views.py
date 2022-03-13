@@ -6,6 +6,7 @@ from django.core.paginator import Paginator
 from django.utils import timezone
 from django.views.decorators.http import require_POST
 from django.db.models import Q
+from django.http import  JsonResponse
 
 #게시글(쇼핑목록) 페이지
 def board_list(request):
@@ -96,26 +97,25 @@ def reply_create(request):
     post = Post.objects.get(pk=pk)  # pk=pk, id=pk
     rdata = Reply(content=content, post_id=post, username=request.user)
     rdata.save()
-    comment = Reply()
-    comment.user = request.user # request.user는 현재 접속한 유저의 정보
-    #위 정보가 필요한가?
+
     return shopping2(request,pk)
 
 #댓글 수정
-def reply_edit(request, pk):
-    post = get_object_or_404(Reply, pk=pk)
-    if request.method == "POST":
-        post = get_object_or_404(Reply, pk=pk)
-        post.content = request.GET['content']
-        post.save()
-        return redirect('main:index')   # 작성 후에 메인페이지로 이동
-
-    else:
-        return render(request,'deal.html',{'post':post}) # 수정버튼 누르면 작성게시글 불러오기
+def reply_edit(request):
+    if request.method == "POST" :
+        pk = request.GET.get("pk")
+        reply = Reply.objects.get(pk=pk)
+        reply.content = request.POST['content']
+        reply.save()
+        return redirect("main:index")
+    else :
+        pk = request.GET.get("pk")
+        reply = Reply.objects.get(pk=pk)
+        jsonContent = {"content": reply.content }
+        return JsonResponse( jsonContent, json_dumps_params={'ensure_ascii':False})
 
 #댓글 삭제
-def reply_delete(request):
-    pk=request.GET['pk']
+def reply_delete(request,pk):
     reply=Reply.objects.get(pk=pk)
     reply.delete()
     return redirect("main:index")

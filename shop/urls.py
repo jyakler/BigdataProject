@@ -11,4 +11,6 @@ urlpatterns=[
     path('replyC/',views.reply_create,name="rC"),
     path('<pk>/p_edit/',views.p_edit,name='p_edit'),
     path('<pk>/delete/',views.delete,name='delete'),
+    path('<pk>/reply_delete/',views.reply_delete,name='reply_delete'),
+    path('reply_edit/',views.reply_edit,name='reply_edit'),
 ]

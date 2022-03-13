@@ -7,6 +7,8 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	<title>메인화면</title>
 	<link rel="stylesheet" href="/static/css/main.css">
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.3.1/css/all.css" integrity="sha384-mzrmE5qonljUremFsqc01SB46JvROS7bZs3IO2EmfFsd15uHvIt+Y8vEf7N7fWAU" crossorigin="anonymous">
+	<script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
 </head>
 
 <body>
@@ -47,10 +49,13 @@
 				</div>
 			</div>
 		</header>
+		<br>
 		<main class="contents">
 			<div class="w_inner">
 				<div class="wrap_banenr">
-					<img src="/static/Main.jpg" width="1100" height="700">
+					<img class="slide1" src="/static/Main.jpg" width="900" height="600">
+					<img class="slide1" src="/static/Main2.jpg" width="900" height="600">
+					<img class="slide1" src="/static/Main3.jpg" width="900" height="600">
 
 
 				</div>
@@ -58,5 +63,25 @@
 		</main>
 	</div>
 </body>
+<script>
+    var index = 0;   //이미지에 접근하는 인덱스
+    window.onload = function(){
+        slideShow();
+    }
 
+    function slideShow() {
+    var i;
+    var x = document.getElementsByClassName("slide1");  //slide1에 대한 dom 참조
+    for (i = 0; i < x.length; i++) {
+       x[i].style.display = "none";   //처음에 전부 display를 none으로 한다.
+    }
+    index++;
+    if (index > x.length) {
+        index = 1;  //인덱스가 초과되면 1로 변경
+    }
+    x[index-1].style.display = "block";  //해당 인덱스는 block으로
+    setTimeout(slideShow, 6000);   //함수를 4초마다 호출
+
+}
+</script>
 </html>
