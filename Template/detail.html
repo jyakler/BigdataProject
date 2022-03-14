@@ -144,7 +144,7 @@
 								</div>
 								<br>
 							<input type="hidden" name="content" value="" class="input">
-								{% if request.user == post.username %}
+								{% if request.user == r.username %}
 							<button onclick="ajax_uu_request({{ r.pk }})" class = "btn btn-danger" type = "submit">수정하기</button>
 							<form action="{% url 'reply_delete' r.pk  %}"  method="POST">
 							{% csrf_token %}
