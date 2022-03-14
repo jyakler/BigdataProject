@@ -15,5 +15,5 @@ class Post(models.Model):
 
 class Reply(models.Model):
     username = models.ForeignKey(User,on_delete=models.CASCADE) #이메일
-    post_id = models.ForeignKey(Post, on_delete=models.SET_NULL, null=True) #댓글 단 사람의 id
+    post_id = models.ForeignKey(Post, on_delete=models.CASCADE, null=True) #댓글 단 사람의 id
     content = models.TextField() #본문

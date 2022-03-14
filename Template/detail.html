@@ -145,11 +145,8 @@
 										<button type="reset" value="Reset">재작성</button>
 									</form>
 								</div>
-							<form onclick="ajax_uu_request({{ r.pk }})">
-							{% csrf_token %}
 							<input type="hidden" name="content" value="" class="input">
-							<button class = "btn btn-danger" type = "submit">수정하기</button>
-							</form><br>
+							<button onclick="ajax_uu_request({{ r.pk }})" class = "btn btn-danger" type = "submit">수정하기</button><br>
 							<form action="{% url 'reply_delete' r.pk  %}"  method="POST">
 							{% csrf_token %}
 							<input type="hidden" name="content" value="" class="input">
@@ -190,14 +187,17 @@
 </body>
 <script>
     function ajax_uu_request(pk) {
-        $.getJSON("{% url 'reply_edit' %}?pk="+pk, function(jsonObj) {
-           $('#ccform').css('display', 'block')
-           const dom1 = $('[name="content"]');
-           dom1.removeAttr("placeholder");
-           dom1.attr(jsonObj.content);
-           $('#ccform h2').text("글을 수정해 주세요")
-            $('#ccform form').attr("action", "{% url 'reply_edit' %}?pk="+pk)
-        });
+        let xhr = new XMLHttpRequest();
+        xhr.onload = function(){
+            let jsonObj = JSON.parse(xhr.responseText);
+            document.getElementById('ccform').style.display = 'block';
+            const dom1 = document.querySelector('[name="content"]');
+            dom1.textContent = jsonObj.content;
+            document.querySelector('#ccform h2').textContent = "글을 수정해 주세요";
+            document.querySelector('#ccform form').action = "{% url 'reply_edit' %}?pk="+pk;
+        };
+        xhr.open("GET", "{% url 'reply_edit' %}?pk="+pk, true);
+        xhr.send();
     }
 </script>
 </html>
