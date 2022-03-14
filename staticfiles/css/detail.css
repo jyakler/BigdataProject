@@ -602,10 +602,6 @@ html {
 	background-color:#dc3545;
 	border-color:#dc3545
 }
-button{
-    border:1px solid black;
-    margin:3px;
-}
 .btn{
 	display:inline-block;
 	font-weight:400;
