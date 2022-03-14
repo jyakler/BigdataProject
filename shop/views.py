@@ -118,7 +118,7 @@ def reply_edit(request):
 def reply_delete(request,pk):
     reply=Reply.objects.get(pk=pk)
     reply.delete()
-    return redirect("main:index")
+    return redirect(request.META.get('HTTP_REFERER'))
 
 #판매완료(기능)
 def sold_out(request, post_id):
