@@ -113,6 +113,16 @@
 					<!-- 찜 콘텐츠 영역 -->
 					<div id="skip_2" class="skip_content">
 						<div class="wrap_tit">
+							<div class="tit_txt">
+								찜<span class="em stress">{{hlist.count}}</span>
+							</div>
+						</div>
+						<div class="area_sorting">
+							<div class="tit_txt">
+								전체<span class="em normal">{{hlist.count}}개</span>
+							</div>
+						</div>
+						<div class="wrap_prod">
 							<table class="list_prod"><!-- for문  -->
 								{% for hdata in hlist %}
 								<tr onclick="location.href='/shop/shopping/{{ hdata.pk }}/'">
@@ -131,9 +141,6 @@
 								</tr>
 								{% endfor %}
 							</table>
-							<div class="tit_txt">
-								찜<span class="em stress">1</span>
-							</div>
 						</div>
 					</div>
 				</div>
