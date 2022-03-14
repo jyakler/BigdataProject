@@ -160,7 +160,6 @@
 					{% if user.is_authenticated %}
 					<form action="{% url 'rC' %}?pk={{post.id}}" method="POST">
 						{% csrf_token %}
-						<input type="text" class="input">
 						<div class="wrap_field">
 							<div class="box_write">
 								<textarea id="prodDesc" name="content" minlength="5" cols="130" rows="10" placeholder="상품 문의사항을 입력해주세요."></textarea>
