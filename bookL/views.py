@@ -71,9 +71,11 @@ def register(request):
 #마이페이지
 def mypage(request):
     plist=[]
+    hlist=[]
     if request.user.is_authenticated:
         plist=Post.objects.filter(username=request.user)
-    context={'user':request.user, 'plist':plist}
+        hlist=Post.objects.filter(like_users=request.user)
+    context={'user':request.user, 'plist':plist, 'hlist':hlist}
     return render(request,'mypage.html',context)
 #html- 마이페이지
 

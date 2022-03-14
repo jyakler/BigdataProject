@@ -8,7 +8,7 @@
 	<title>야 너두</title>
 	<link rel="stylesheet" href="/static/css/mypage.css">
 	<script src="https://code.jquery.com/jquery-3.6.0.slim.js"></script>
-	<script src="./js/common.ui.js"></script>
+	<script src="/static/js/common.ui.js"></script>
 </head>
 
 <body>
@@ -53,7 +53,6 @@
 				<div class="wrap_info_store">
 					<div class="thumb_store">
 						<span class="ico_store">
-							<img src="/static/images/ico_store.jpg" alt="상점이미지" class="img_g">
 						</span>
 						<strong class="name_store">{{user.last_name}}</strong>
 						<div class="area_btn">
@@ -62,16 +61,13 @@
 					</div>
 					<div class="info_store">
 						<dl class="list_info">
-							<dt>상점오픈일</dt>
-							<dd>449 일 전</dd>
 						</dl>
 					</div>
 				</div>
 				<div class="wrap_tab">
 					<ul class="skip_nav">
-						<li class="current"><a href="#skip_1">상품 5</a></li>
-						<li><a href="#skip_2">찜 2</a></li>
-						<li><a href="#skip_3">상점후기 0</a></li>
+						<li class="current"><a href="#skip_1">상품</a></li>
+						<li><a href="#skip_2">찜</a></li>
 					</ul>
 				</div>
 				<div class="skip_container">
@@ -118,8 +114,8 @@
 					<div id="skip_2" class="skip_content">
 						<div class="wrap_tit">
 							<table class="list_prod"><!-- for문  -->
-								{% for pdata in plist %}
-								<tr onclick="location.href='/{{ pdata.pk }}/shop/likes/'">
+								{% for pdata in hlist %}
+								<tr onclick="location.href='/shop/shopping/{{ pdata.pk }}/'">
 									<td class="thumb_img">
 										<img src="{{pdata.photo.url}}" alt="">
 									</td>
@@ -139,67 +135,6 @@
 								찜<span class="em stress">1</span>
 							</div>
 						</div>
-						<div class="area_sorting sorting_right">
-							<div class="util_sorting">
-								<ul class="list_sorting">
-									<li>
-										<!-- 활성화시 .active 클래스 추가 -->
-										<button class="btn active">최신순</button>
-									</li>
-									<li>
-										<button class="btn">인기순</button>
-									</li>
-									<li>
-										<button class="btn">저가순</button>
-									</li>
-									<li>
-										<button class="btn">고가순</button>
-									</li>
-								</ul>
-							</div>
-						</div>
-						<div class="wrap_prod">
-							<ul class="list_prod type_2">
-								<li>
-									<div class="thumb_img">
-										<img src="./images/img_item05.jpg" alt="">
-									</div>
-									<span class="tit_prod">
-										{{ title }}
-									</span>
-									<span class="price_prod">
-										<em class="num_price">{{ price }}</em>원
-									</span>
-									<span class="date_prod">
-										{{ date }}
-									</span>
-									<p class="location_prod">
-										대구광역시 중구 동인동 2가
-									</p>
-								</li>
-								<li>
-									<div class="thumb_img">
-										<img src="./images/img_item05.jpg" alt="">
-									</div>
-									<span class="tit_prod">
-										{{ title }}
-									</span>
-									<span class="price_prod">
-										<em class="num_price">{{ price }}</em>원
-									</span>
-									<span class="date_prod">
-										{{ date }}
-									</span>
-									<p class="location_prod">
-										대구광역시 중구 동인동 2가
-									</p>
-								</li>
-							</ul>
-						</div>
-					</div>
-					<!-- 상점 후기 콘텐츠 영역 -->
-					<div id="skip_3" class="skip_content">
-						contents3
 					</div>
 				</div>
 			</div>

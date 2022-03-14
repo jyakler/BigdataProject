@@ -28,8 +28,6 @@ def shopping2(request,pk):
         replylist=Reply.objects.filter(post_id=pk)
      except:
         print("null")
-     for a in replylist:
-         print(a.content)
      context={"post":post, "reply":replylist}
      return render(request,'detail.html',context)
 
@@ -57,7 +55,6 @@ def p_create(request):
             price=request.POST['price']
             photo=request.FILES['photo']
             content=request.POST['content']
-            print(id,title,price,content)
             pdata=Post(title=title,username=id,price=price,content=content,photo=photo)
             pdata.save()
             return redirect('result')
