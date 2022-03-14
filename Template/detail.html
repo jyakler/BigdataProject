@@ -128,8 +128,8 @@
 					<div>
 						{% for r in reply %}
 						<div class ="group_data">
-						<b>{{r.username.last_name}}</b>&ensp;<br>
-						<a>{{r.content}}</a>
+						<p style="color:#de5151;"><b>{{r.username.last_name}}</b></p>&ensp;
+						&ensp;<a>{{r.content}}</a>
 							<div class = 'button_group' >
 								<div id="ccform"  style="display:none">
 								  <h2>의견을 남겨 주세요!</h2>
@@ -142,14 +142,17 @@
 										<button type="reset" value="Reset">재작성</button>
 									</form>
 								</div>
+								<br>
 							<input type="hidden" name="content" value="" class="input">
-							<button onclick="ajax_uu_request({{ r.pk }})" class = "btn btn-danger" type = "submit">수정하기</button><br>
+								{% if request.user == post.username %}
+							<button onclick="ajax_uu_request({{ r.pk }})" class = "btn btn-danger" type = "submit">수정하기</button>
 							<form action="{% url 'reply_delete' r.pk  %}"  method="POST">
 							{% csrf_token %}
 							<input type="hidden" name="content" value="" class="input">
 							<button class="btn btn-dark" type = "submit">삭제하기</button>
 							</form>
-								</div>
+								{% endif %}
+							</div>
 							<br><br>
 						<div>
 						{% endfor %}<br><br>
