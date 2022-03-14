@@ -114,19 +114,19 @@
 					<div id="skip_2" class="skip_content">
 						<div class="wrap_tit">
 							<table class="list_prod"><!-- for문  -->
-								{% for pdata in hlist %}
-								<tr onclick="location.href='/shop/shopping/{{ pdata.pk }}/'">
+								{% for hdata in hlist %}
+								<tr onclick="location.href='/shop/shopping/{{ hdata.pk }}/'">
 									<td class="thumb_img">
-										<img src="{{pdata.photo.url}}" alt="">
+										<img src="{{hdata.photo.url}}" alt="">
 									</td>
 									<td class="tit_prod">
-										{{ pdata.title }}
+										{{ hdata.title }}
 									</td>
 									<td class="price_prod">
-										<em class="num_price">{{ pdata.price }}</em>원
+										<em class="num_price">{{ hdata.price }}</em>원
 									</td>
 									<td class="date_prod">
-										{{ pdata.created_at }}
+										{{ hdata.created_at }}
 									</td>
 								</tr>
 								{% endfor %}
