@@ -143,12 +143,14 @@
 									</form>
 								</div>
 							<input type="hidden" name="content" value="" class="input">
+								{% if request.user == post.username %}
 							<button onclick="ajax_uu_request({{ r.pk }})" class = "btn btn-danger" type = "submit">수정하기</button><br>
 							<form action="{% url 'reply_delete' r.pk  %}"  method="POST">
 							{% csrf_token %}
 							<input type="hidden" name="content" value="" class="input">
 							<button class="btn btn-dark" type = "submit">삭제하기</button>
 							</form>
+								{% endif %}
 								</div>
 							<br><br>
 						<div>
